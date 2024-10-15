@@ -7,7 +7,7 @@ class AddContact extends React.Component {
       successMessage: undefined,
     };
   }
-  _handleAddContactFormSubmit = (e) => {
+  handleAddContactFormSubmit = (e) => {
     e.preventDefault();
     const name = e.target.elements.contactName.value.trim();
     const email = e.target.elements.contactEmail.value.trim();
@@ -19,7 +19,7 @@ class AddContact extends React.Component {
       phone: phone,
     });
 
-    if (response.status == "successs") {
+    if (response.status == "success") {
       this.setState(() => {
         return {
           errorMessage: undefined,
@@ -71,14 +71,14 @@ class AddContact extends React.Component {
               <div></div>
             ) : (
               <div className="text-success text-center col-12">
-                {this.state.successMessage}
+                {this.state.errorMessage}
               </div>
             )}
             {this.state.successMessage == undefined ? (
               <div></div>
             ) : (
               <div className="text-danger text-center col-12">
-                {this.state.errorMessage}
+                {this.state.successMessage}
               </div>
             )}
             <div className="col-12 col-md-6 offset-md-3 p-1">

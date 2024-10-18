@@ -77,17 +77,40 @@ class ContactIndex extends React.Component {
       };
     });
   };
+  handleContactDelete = (Contact) => {
+    this.setState((prevState) => {
+      return {
+        contactList: prevState.contactList.filter((obj) => {
+          if (obj.id !== Contact.id) {
+            return obj;
+          }
+        }),
+      };
+    });
+  };
 
+  handleAddRandomContact = (newContact) => {
+    const newFinalContact = {
+      ...newContact,
+      id: this.state.contactList[this.state.contactList.length - 1].id + 1,
+      isFavorite: false,
+    };
+    this.setState((prevState) => {
+      return {
+        contactList: prevState.contactList.concat([newFinalContact]),
+      };
+    });
+  };
   render() {
     return (
       <div>
         <Header />
         <div className="container" style={{ minHeight: "85vh" }}>
           <div className="row py-3">
-            <div className="col-4 offset-2">
-              <AddRandomComponent />
+            <div className="col-4 offset-2 row">
+              <AddRandomComponent handleAddRandomContact={this.handleAddRandomContact} />
             </div>
-            <div className="col-4">
+            <div className="col-4 row">
               <RemoveAllContact />
             </div>
             <div className=" row py-2">
@@ -102,6 +125,7 @@ class ContactIndex extends React.Component {
                     (u) => u.isFavorite === true
                   )}
                   favoriteClick={this.handleToggleFavorite}
+                  deleteContact={this.handleContactDelete}
                 />
               </div>
             </div>
@@ -112,6 +136,7 @@ class ContactIndex extends React.Component {
                     (u) => u.isFavorite === false
                   )}
                   favoriteClick={this.handleToggleFavorite}
+                  deleteContact={this.handleContactDelete}
                 />
               </div>
             </div>

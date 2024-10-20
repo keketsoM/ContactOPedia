@@ -11,4 +11,5 @@ const GetApiCallUser = () => {
   );
   return reponse;
 };
+
 export default GetApiCallUser;
